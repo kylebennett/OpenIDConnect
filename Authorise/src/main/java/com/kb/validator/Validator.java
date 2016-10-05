@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.kb.validators;
+package com.kb.validator;
 
 /**
  * @author Kyle
