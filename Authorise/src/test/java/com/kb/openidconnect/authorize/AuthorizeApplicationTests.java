@@ -1,4 +1,4 @@
-package com.kb;
+package com.kb.openidconnect.authorize;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

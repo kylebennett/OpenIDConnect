@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.kb.validator;
+package com.kb.openidconnect.authorize.validator;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.kb.request.AuthorizeRequest;
+import com.kb.openidconnect.authorize.request.AuthorizeRequest;
 
 /**
  * @author kylebennett
@@ -51,6 +51,14 @@ public class AuthorizeRequestValidatorTest {
 	public void test_isValid_RequestWithNullScope_willReturnFalse() {
 
 		AuthorizeRequest request = new AuthorizeRequest(responseType, null, clientId, redirectURI, state);
+
+		assertThat(validator.isValid(request)).isFalse();
+	}
+
+	@Test
+	public void test_isValid_RequestWithScopeNotOpenID_WillReturnFalse() {
+
+		AuthorizeRequest request = new AuthorizeRequest(responseType, "notOpenID", clientId, redirectURI, state);
 
 		assertThat(validator.isValid(request)).isFalse();
 	}

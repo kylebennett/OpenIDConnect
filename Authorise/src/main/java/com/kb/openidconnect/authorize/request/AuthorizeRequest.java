@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.kb.request;
+package com.kb.openidconnect.authorize.request;
 
 /**
  * @author Kyle

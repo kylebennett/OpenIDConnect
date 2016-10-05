@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.kb.controller;
+package com.kb.openidconnect.authorize.controller;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kb.request.AuthorizeRequest;
-import com.kb.validator.AuthorizeRequestValidator;
+import com.kb.openidconnect.authorize.request.AuthorizeRequest;
+import com.kb.openidconnect.authorize.response.ResponseBuilder;
+import com.kb.openidconnect.authorize.token.TokenBuilder;
+import com.kb.openidconnect.authorize.validator.Validator;
 
 /**
  * @author Kyle
@@ -22,7 +24,13 @@ public class AuthorizeController {
 	private static final Logger LOG = Logger.getLogger(AuthorizeController.class);
 
 	@Autowired
-	private AuthorizeRequestValidator<AuthorizeRequest> validator;
+	private Validator<AuthorizeRequest> validator;
+
+	@Autowired
+	private TokenBuilder tokenBuilder;
+
+	@Autowired
+	private ResponseBuilder responseBuilder;
 
 	@RequestMapping("/authorize")
 	public String authorize(@RequestParam(value = "response_type", required = true) final String responseType,
@@ -48,12 +56,17 @@ public class AuthorizeController {
 
 			// get user consent
 
+			// build token
+			String authToken = tokenBuilder.buildToken();
+
 			// return success response
-			return "Success";
+			return responseBuilder.buildSuccessResponse(request.getRedirectURI(), authToken, request.getState());
+
 		} else {
 
 			// return error response
-			return "Error";
+			return responseBuilder.buildErrorResponse(request.getRedirectURI(), "error", "description",
+					request.getState());
 		}
 
 	}

@@ -1,4 +1,4 @@
-package com.kb;
+package com.kb.openidconnect.authorize;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

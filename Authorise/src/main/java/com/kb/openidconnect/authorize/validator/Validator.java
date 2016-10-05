@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.kb.validator;
+package com.kb.openidconnect.authorize.validator;
 
 /**
  * @author Kyle
