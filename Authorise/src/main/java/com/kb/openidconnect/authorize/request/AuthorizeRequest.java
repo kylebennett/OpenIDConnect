@@ -112,4 +112,76 @@ public class AuthorizeRequest {
 				.append(state).append("]");
 		return builder.toString();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clientId == null) ? 0 : clientId.hashCode());
+		result = prime * result + ((redirectURI == null) ? 0 : redirectURI.hashCode());
+		result = prime * result + ((responseType == null) ? 0 : responseType.hashCode());
+		result = prime * result + ((scope == null) ? 0 : scope.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof AuthorizeRequest)) {
+			return false;
+		}
+		AuthorizeRequest other = (AuthorizeRequest) obj;
+		if (clientId == null) {
+			if (other.clientId != null) {
+				return false;
+			}
+		} else if (!clientId.equals(other.clientId)) {
+			return false;
+		}
+		if (redirectURI == null) {
+			if (other.redirectURI != null) {
+				return false;
+			}
+		} else if (!redirectURI.equals(other.redirectURI)) {
+			return false;
+		}
+		if (responseType == null) {
+			if (other.responseType != null) {
+				return false;
+			}
+		} else if (!responseType.equals(other.responseType)) {
+			return false;
+		}
+		if (scope == null) {
+			if (other.scope != null) {
+				return false;
+			}
+		} else if (!scope.equals(other.scope)) {
+			return false;
+		}
+		if (state == null) {
+			if (other.state != null) {
+				return false;
+			}
+		} else if (!state.equals(other.state)) {
+			return false;
+		}
+		return true;
+	}
 }
