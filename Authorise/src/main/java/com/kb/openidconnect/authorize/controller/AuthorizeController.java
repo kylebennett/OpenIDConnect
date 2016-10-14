@@ -32,6 +32,8 @@ public class AuthorizeController {
 	@Autowired
 	private ResponseBuilder responseBuilder;
 
+	private static final String SECRET = "SECRET";
+
 	@RequestMapping("/authorize")
 	public String authorize(@RequestParam(value = "response_type", required = true) final String responseType,
 			@RequestParam(value = "scope", required = true) final String scope,
@@ -57,16 +59,18 @@ public class AuthorizeController {
 			// get user consent
 
 			// build token
-			String authToken = tokenBuilder.buildToken();
+			String authToken = tokenBuilder.buildToken(SECRET);
 
 			// return success response
 			return responseBuilder.buildSuccessResponse(request.getRedirectURI(), authToken, request.getState());
 
 		} else {
 
-			// return error response
-			return responseBuilder.buildErrorResponse(request.getRedirectURI(), "error", "description",
+			String responseUrl = responseBuilder.buildErrorResponse(request.getRedirectURI(), "error", "description",
 					request.getState());
+
+			// return error response
+			return "redirect:" + responseUrl;
 		}
 
 	}

@@ -12,5 +12,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface TokenBuilder {
 
-	public String buildToken();
+	public String buildToken(String Secret);
 }
